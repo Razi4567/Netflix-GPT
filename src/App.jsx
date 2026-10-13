@@ -1,16 +1,13 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { Provider } from "react-redux"
+import Body from "./Components/Body"
+import appStore from "./Utils/appStore"
 
-function App() {
-
-  return (
-    <>
-      <h1>NetFlix GPT</h1>
-    </>
-  )
+const App = () => {
+    return (
+        <Provider store={appStore}>
+            <Body />
+        </Provider>
+    )
 }
 
 export default App
