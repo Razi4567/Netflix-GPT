@@ -9,7 +9,6 @@ import useTopRatedMovies from "../Utils/Hooks/useTopRatedMovies";
 import useUpComingMovies from "../Utils/Hooks/useUpComingMovies";
 import useComedyMovies from "../Utils/Hooks/useComedyMovies";
 import NetflixGPT from "./NetflixGpt";
-import useOpenAI from "../Utils/Hooks/useOpenAI";
 
 function Browse() {
   const [isBrowsePage] = useState(true);

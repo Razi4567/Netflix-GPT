@@ -2,14 +2,8 @@ import Header from "./Header"
 import { useRef, useState } from "react";
 import { checkFormData } from "../Utils/validate";
 import { supabase } from "../Utils/supabase";
-// import { useDispatch } from "react-redux";
-// import { addUser, removeUser } from "../Utils/userSlice";
-// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
 
     const [ isSignInForm, setIsSignInForm ] = useState(true);
     const [ isBrowsePage ] = useState(false);

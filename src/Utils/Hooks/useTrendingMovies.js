@@ -11,7 +11,6 @@ const useTrendingMovies = () => {
         try{
             const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&page=1&sort_by=popularity.desc', API_OPTIONS)
             const trendingMovies = await response.json();
-            // console.log("Trending movies:",trendingMovies);
             dispatch(addTrendingMovies(trendingMovies?.results));
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);

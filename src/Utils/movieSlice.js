@@ -10,7 +10,6 @@ const movieSlice = createSlice(
             upComingMovies: null,
             comedyMovies: null,
             trailerKey: null,
-            // movieGenres: null,
         },
         reducers: {
             addNowPlayingMovies: (state, action) => {
@@ -31,9 +30,6 @@ const movieSlice = createSlice(
             addTrailerKey: (state, action) => {
                 state.trailerKey = action.payload;
             },
-            // addMovieGenres: (state, action) => {
-            //     state.movieGenres = action.payload;
-            // },
             removeMovie: (state) => {
                 state.nowPlayingMovies = null;
                 state.trendingMovies = null;

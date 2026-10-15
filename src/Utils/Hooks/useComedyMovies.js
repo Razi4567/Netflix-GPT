@@ -6,8 +6,6 @@ import { addComedyMovies } from "../movieSlice";
 const useComedyMovies = () => {
 
     const comedyMovies = useSelector(store => store.movies.comedyMovies);
-    // console.log(comedyMovies);
-
     const dispatch = useDispatch();
 
     const fetchMovies = async() => {
@@ -17,7 +15,6 @@ const useComedyMovies = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const json = await response.json();
-            // console.log("Comedy Movies", json);
             dispatch(addComedyMovies(json?.results));
         }catch(err){
             console.error("Error fetching movies:", err);

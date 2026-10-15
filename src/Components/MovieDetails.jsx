@@ -11,7 +11,6 @@ import MovieList from "./MovieList";
 const MovieDetails = () => {
 
     const {movieId} = useParams();
-    // console.log(movieId);
     const movieData = useMovieDetails(movieId);
     const relatedMovies = useRelatedMovies(movieId);
 
@@ -22,8 +21,6 @@ const MovieDetails = () => {
         </div>
     );
 
-    // console.log(movieData);
-    // console.log(relatedMovies);
     const {poster_path,title,vote_average,release_date,runtime,adult,overview,genres} = movieData;
     const year = release_date.slice(0,4);
     const hours = Math.floor(runtime / 60);

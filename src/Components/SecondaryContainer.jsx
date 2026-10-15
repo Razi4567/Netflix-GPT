@@ -1,5 +1,4 @@
 import MovieList from './MovieList'
-import { MOVIE_GENRES } from '../Utils/constants';
 import { useSelector } from 'react-redux';
 
 const SecondaryContainer = () => {

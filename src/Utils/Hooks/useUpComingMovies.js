@@ -12,7 +12,6 @@ const useUpComingMovies = () => {
         try{
             const response = await fetch('https://api.themoviedb.org/3/movie/upcoming?page=2', API_OPTIONS)
             const json = await response.json();
-            // console.log("Upcoming Movies", json);
             dispatch(addUpComingMovies(json?.results));
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);

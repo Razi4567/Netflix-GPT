@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../Utils/lang";
 import { useRef } from "react";
-import genai from "../Utils/genAI";
 import { API_OPTIONS } from "../Utils/constants";
 import { addGptMovies } from "../Utils/gptSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { askGemini } from "../Utils/genAI";
 
 const GPTSearchBar = () => {
 
@@ -27,24 +27,18 @@ const GPTSearchBar = () => {
     const prompt ="Act as movie recommendation system and suggest 5 movies for the query:" +
       searchText.current.value +
       ".Only give the names of the 5 movies as comma seperated like the example result given ahead. Example result: Movie1, Movie2, Movie3, Movie4, Movie5";
-    try {
-      const interaction = await genai.interactions.create({
-        model: "gemini-3.6-flash",
-        input: prompt,
-      });
+      try {
+        const result = await askGemini(prompt,);
 
-      const genAiMovies = interaction.output_text?.split(",");
+        console.log(result);
 
-      const promiseArray = genAiMovies.map((movie) => getMovieDetails(movie));
-
-      const tmdbResults = await Promise.all(promiseArray);
-
-      dispatch(addGptMovies(tmdbResults));
-    } catch (error) {
-      console.error("Gemini API error:", error);
-    }
-
-
+        const genAiMovies = result?.split(",");
+        const promiseArray = genAiMovies.map((movie) => getMovieDetails(movie));
+        const tmdbResults = await Promise.all(promiseArray);
+        dispatch(addGptMovies(tmdbResults));
+      } catch (error) {
+        console.error(error);
+      }
   }
 
   return (

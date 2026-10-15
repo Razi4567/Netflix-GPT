@@ -1,54 +1,70 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCaretDown,
-  faLanguage,
-  faSortDown,
-  faCircleXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faSortDown,} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import netflix_logo from "../assets/netflix_logo.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { supabase } from "../Utils/supabase";
 import useOnAuthSession from "../Utils/Hooks/useOnAuthSession";
-import { SUPPORTED_LANGUAGES, USER_LOGO } from "../Utils/constants";
+import { API_OPTIONS, SUPPORTED_LANGUAGES, USER_LOGO } from "../Utils/constants";
 import { toggleShowGptPage } from "../Utils/gptSlice";
 import { lang } from "../Utils/lang";
 import LoginHeader from "./LoginHeader";
 import { changeLanguage } from "../Utils/configSlice";
 
 const Header = (props) => {
-  // console.log(props.isBrowsePage);
 
   const [popUp, setPopUp] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
-  // Calling the custom made hook for onAuth session logic
+  // Calling the custom hook for onAuth session logic
   useOnAuthSession();
 
   const user = useSelector((store) => store.user);
 
   const currentLang = useSelector((store) => store.config.language);
-  // console.log(currentLang);
+ 
   const { showGptPage } = useSelector((store) => store.gpt);
 
   const dispatch = useDispatch();
 
+  const searchText = useRef(null);
 
   const handleIconClick = () => {
     setPopUp(!popUp);
   };
-
-  const handleSearch = () => {
-    setShowSearch(!showSearch);
+  const getMovieDetails = async (movie) => {
+    try{
+      const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS,
+    );
+    const json = await data.json();
+    return json.results;
+    }catch(error){
+      console.error("Error fetching movies:", error);
+    }
+    
   };
 
-  // const handleSignOut = () => {
+  const handleSearch = async () => {
+    setShowSearch(!showSearch);
+    // console.log(searchText.current.value);
+    if(showSearch){
+      console.log(searchText.current.value);
+      const movie = searchText.current.value;
+      const result = await getMovieDetails(movie);
+      result.map((m) => console.log(m.title,m.id));
+    } 
+    
+  };
+
   async function signOut() {
     const { error } = await supabase.auth.signOut();
     // navigate("/login");
   }
-  // }
 
   const togglePage = () => {
     dispatch(toggleShowGptPage());
@@ -61,7 +77,7 @@ const Header = (props) => {
   return (
     <>
       {props.isBrowsePage === true ? (
-        <div className="fixed flex px-4 py-3.5 justify-between z-10 bg-black items-center text-white w-full md:px-28 md:absolute">
+        <div className="fixed flex px-4 py-3.5 justify-between z-10 bg-black items-center text-white w-full md:px-28 md:py-5 md:absolute">
           <div className="w-24 md:w-30">
             <img src={netflix_logo} alt="netflix-logo" />
           </div>
@@ -84,9 +100,21 @@ const Header = (props) => {
               </Link>
             </ul>
             <div className="flex gap-3 md:gap-5 items-center justify-between">
+              <div className="hidden md:inline">
+                {showSearch === false ? (
+                  <div onClick={handleSearch}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    <input type="text" ref={searchText} placeholder="Search for movies" className="px-3 py-2 outline-0 bg-[#32303092] w-60 rounded-l-md"/>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" onClick={handleSearch} className="bg-red-800 px-1.5 py-2 rounded-r-md"/>
+                  </div>
+                )}
+              </div>
               <select
                 name="language"
-                className="hidden md:block rounded-md cursor-pointer md:mr-4"
+                className="hidden md:block rounded-md cursor-pointer"
                 onChange={handleChangeLang}
               >
                 {SUPPORTED_LANGUAGES.map((lang) => {

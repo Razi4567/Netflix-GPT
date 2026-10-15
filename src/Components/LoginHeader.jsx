@@ -8,7 +8,6 @@ const LoginHeader = () => {
       <div className="w-28 md:w-[150px] mx-auto md:mx-0 z-10">
         <img src={netflix_logo} alt="netflix-logo" />
       </div>
-      {/* {props.isLandingPage && ( */}
       <div className="gap-2.5 hidden md:flex">
         <select name="language" className="md:px-4 rounded-md cursor-pointer md:mr-4">
             {
@@ -23,7 +22,6 @@ const LoginHeader = () => {
           </button>
         </Link>
       </div>
-      {/* )} */}
     </div>
   );
 };
