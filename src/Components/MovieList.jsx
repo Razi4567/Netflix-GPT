@@ -5,8 +5,8 @@ const MovieList = ({title, movies, size}) => {
     const imgSize = size? size : "w500";
 
     return movies && (
-        <div className='mb-5'>
-            <h1 className="text-white text-lg py-1 pl-1">{title}</h1>
+        <div className='mb-1 md:mb-5'>
+            <h1 className="text-white text-sm md:text-lg py-1 pl-1">{title}</h1>
             <div className="flex gap-5 overflow-x-auto scrollbar-none">
                 {
                     movies?.map((movie) => {

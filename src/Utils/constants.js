@@ -11,3 +11,9 @@ export const USER_LOGO = "https://wallpapers.com/images/hd/netflix-profile-pictu
 export const MOVIE_GENRES = ["Now playing", "Trending", "Action", "Thriller", "Comedy", "Drama"];
 
 export const TMDB_IMG_URL = "https://image.tmdb.org/t/p/";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  //   { identifire: "en", name: "English" },
+];

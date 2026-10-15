@@ -12,7 +12,7 @@ const Login = () => {
     // const navigate = useNavigate();
 
     const [ isSignInForm, setIsSignInForm ] = useState(true);
-    const [ isLandingPage ] = useState(false);
+    const [ isBrowsePage ] = useState(false);
     const [ errorMessage, setErrorMessage] = useState(null);
 
     const userName = useRef("");
@@ -81,11 +81,11 @@ const Login = () => {
 
     return(
         <div className="bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/4a59f124-030b-417a-9565-8362f395bdb0/web/IN-en-20260914-TRIFECTA-perspective_16ddf2ab-4945-4e79-8f84-6df3eef26875_medium.jpg')]
-        bg-cover bg-center h-screen relative">
-            <div className="absolute inset-0 bg-black/50"></div>
-            <Header data={isLandingPage}/> 
+        bg-cover bg-center h-screen relative object-cover">
+            <div className="absolute inset-0 bg-black/30"></div>
+            <Header data={isBrowsePage}/> 
            
-            <form onSubmit={(e) => e.preventDefault()} className="relative flex flex-col w-3/12 mx-auto my-30 pt-10 pb-16 z-10 items-center gap-2 bg-[#000000a7] text-[#fff]">
+            <form onSubmit={(e) => e.preventDefault()} className="relative flex flex-col w-2/3 md:w-1/4 mx-auto my-30 pt-10 pb-16 z-5 items-center gap-2 bg-[#000000a7] text-[#fff]">
                 <h1 className="text-2xl font-bold">{isSignInForm === true? "Sign In": "Enter your details"}</h1>
                 {
                     !isSignInForm && <input ref={userName} type="text" placeholder="Username" className=" bg-[#212121] outline-0 rounded-md w-8/12 px-4 py-4 "/> 
@@ -98,7 +98,6 @@ const Login = () => {
                     {isSignInForm === true? "Sign In": "Submit"}
                 </button>
                 <p className="text-sm">{isSignInForm === true?"New to Netflix? ":"Already have an account? "}<span onClick={toggleForm} className="cursor-pointer text-gray-400">{isSignInForm === true?"Sign Up":"Sign In"}</span></p>
-                
             </form>
         </div>
         

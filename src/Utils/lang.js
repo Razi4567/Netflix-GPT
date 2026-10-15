@@ -1,0 +1,26 @@
+export const lang = {
+  en: {
+    home: "Home",
+    movies: "Movies",
+    mylist: "My list",
+    netflixgpt: "NetflixGPT",
+    signin: "SignIn",
+    signout: "signout",
+    play: "Play",
+    moreinfo: "More info",
+    search: "Search",
+    gptSearchBarPlaceholder: "What would you like to watch today?",
+  },
+  hindi: {
+    home: "घर",
+    movies: "फ़िल्में",
+    mylist: "मेरी सूची",
+    netflixgpt: "NetflixGPT",
+    signin: "SignIn",
+    signout: "SignOut",
+    play: "खेल",
+    moreinfo: "और जानकारी",
+    search: "खोज",
+    gptSearchBarPlaceholder: "आज आप क्या देखना चाहेंगे?",
+  },
+};

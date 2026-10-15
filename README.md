@@ -19,8 +19,24 @@
 - Stored the fetched movies lists in the movie slice
 - Fetched the trailer key of the first movie from trending movie list
 - Stored the trailer key to the movie slice of reduc store
-- Browse page is rendered in two segements with the first for video background and title and the second for movie categories lists
+- Created browse page with two segements one for video background and title and the second for movie categories lists
 - Bugfix - Reseting the movie slice after logout 
+- Created movielist component for movie categories
+- Created moviecard component for movie image rendering
+- Created movie details page
+- Fetched tmdb movie details api for getting more info about the movie
+- Made movie card clickable to navigate to movie details page 
+- Fetched tmdb related movies api
+- Stored the movies to the movie slice
+- Displayed the corresponding similer movies in the details page
+- Made multilingual rendering (English & hindi)
+- Created config slice in store
+- Stored the selected language key to store
+- Implemented GenAI movie suggestion
+- Fetched AI suggested movies from tmdb
+- Stored the suggested movies to store
+- Reused the movielist and moviecard for rendering the movies
+- Made the page responsive to small and large screens
 
 # Features
 - Login/signup page
