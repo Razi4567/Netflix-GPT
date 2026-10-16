@@ -43,6 +43,7 @@ const movieSlice = createSlice(
                 state.topRatedMovies = null;
                 state.upComingMovies = null;
                 state.comedyMovies = null;
+                state.searchedMovies = null,
                 state.trailerKey = null;
             },
         }
