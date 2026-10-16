@@ -52,10 +52,10 @@ const Header = (props) => {
   };
 
   const handleSearch = async () => {
-    setShowSearch(!showSearch);
+    setShowSearch(true);
     if(showSearch){
       const movie = searchText.current.value;
-      if(!movie) return;
+      // if(!movie) return;
       const result = await getMovieDetails(movie);
       dispatch(addSearchedMovies(result));
     } 
