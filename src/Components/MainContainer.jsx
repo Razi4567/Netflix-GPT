@@ -10,7 +10,7 @@ const MainContainer = () => {
 
     if(trendingMovies === null) return;
 
-    const mainMovie = trendingMovies[2];
+    const mainMovie = trendingMovies[1];
 
     const { original_title, overview, id } = mainMovie;
     

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faSortDown,} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import netflix_logo from "../assets/netflix_logo.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { supabase } from "../Utils/supabase";
 import useOnAuthSession from "../Utils/Hooks/useOnAuthSession";
@@ -32,6 +32,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
 
   const searchText = useRef(null);
+  const searchRef = useRef(null);
 
   const handleIconClick = () => {
     setPopUp(!popUp);
@@ -52,12 +53,14 @@ const Header = (props) => {
   };
 
   const handleSearch = async () => {
-    setShowSearch(true);
+    setShowSearch(!showSearch);
     if(showSearch){
       const movie = searchText.current.value;
-      // if(!movie) return;
-      const result = await getMovieDetails(movie);
-      dispatch(addSearchedMovies(result));
+      if(movie){
+        const result = await getMovieDetails(movie);
+        console.log(result)
+        dispatch(addSearchedMovies(result));
+      }
     } 
   };
 
@@ -106,8 +109,18 @@ const Header = (props) => {
                   </div>
                 ) : (
                   <div className="flex items-center">
-                    <input type="text" ref={searchText} placeholder="Search for movies" className="px-3 py-2 outline-0 bg-[#32303092] w-60 rounded-l-md"/>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" onClick={handleSearch} className="bg-red-800 px-1.5 py-2 rounded-r-md"/>
+                    <input
+                      type="text"
+                      ref={searchText}
+                      placeholder="Search for movies"
+                      className="px-3 py-2 outline-0 bg-[#32303092] w-60 rounded-l-md text-white"
+                    />
+                    <FontAwesomeIcon
+                      icon={faMagnifyingGlass}
+                      size="lg"
+                      onClick={handleSearch}
+                      className="bg-red-800 px-1.5 py-2 rounded-r-md"
+                    />
                   </div>
                 )}
               </div>
@@ -134,7 +147,10 @@ const Header = (props) => {
               >
                 {showGptPage ? "Home Page" : "NetflixGPT"}
               </button>
-              <div className="flex gap-1" onClick={handleIconClick}>
+              <div
+                className="flex gap-1"
+                onClick={handleIconClick}
+              >
                 <img
                   src={USER_LOGO}
                   alt="user_icon"

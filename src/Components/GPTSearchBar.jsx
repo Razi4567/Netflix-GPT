@@ -29,9 +29,7 @@ const GPTSearchBar = () => {
       ".Only give the names of the 5 movies as comma seperated like the example result given ahead. Example result: Movie1, Movie2, Movie3, Movie4, Movie5";
       try {
         const result = await askGemini(prompt,);
-
         console.log(result);
-
         const genAiMovies = result.split(",");
         const promiseArray = genAiMovies.map((movie) => getMovieDetails(movie));
         const tmdbResults = await Promise.all(promiseArray);
