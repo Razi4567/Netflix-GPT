@@ -10,7 +10,7 @@ const NetflixGPT = () => {
       </div>
       <div className="w-full">
         <GPTSearchBar />
-        {/* <GPTMoviesList/> */}
+        <GPTMoviesList/>
       </div>
     </>
   );

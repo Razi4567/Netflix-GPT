@@ -32,9 +32,10 @@ const GPTSearchBar = () => {
 
         console.log(result);
 
-        const genAiMovies = result?.split(",");
+        const genAiMovies = result.split(",");
         const promiseArray = genAiMovies.map((movie) => getMovieDetails(movie));
         const tmdbResults = await Promise.all(promiseArray);
+        console.log(tmdbResults);
         dispatch(addGptMovies(tmdbResults));
       } catch (error) {
         console.error(error);

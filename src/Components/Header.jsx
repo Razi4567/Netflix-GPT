@@ -11,6 +11,7 @@ import { toggleShowGptPage } from "../Utils/gptSlice";
 import { lang } from "../Utils/lang";
 import LoginHeader from "./LoginHeader";
 import { changeLanguage } from "../Utils/configSlice";
+import { addSearchedMovies } from "../Utils/movieSlice";
 
 const Header = (props) => {
 
@@ -23,6 +24,8 @@ const Header = (props) => {
   const user = useSelector((store) => store.user);
 
   const currentLang = useSelector((store) => store.config.language);
+
+  const searchedMovies = useSelector((store) => store.movies.searchedMovies);
  
   const { showGptPage } = useSelector((store) => store.gpt);
 
@@ -46,24 +49,20 @@ const Header = (props) => {
     }catch(error){
       console.error("Error fetching movies:", error);
     }
-    
   };
 
   const handleSearch = async () => {
     setShowSearch(!showSearch);
-    // console.log(searchText.current.value);
     if(showSearch){
-      console.log(searchText.current.value);
       const movie = searchText.current.value;
+      if(!movie) return;
       const result = await getMovieDetails(movie);
-      result.map((m) => console.log(m.title,m.id));
+      dispatch(addSearchedMovies(result));
     } 
-    
   };
 
   async function signOut() {
     const { error } = await supabase.auth.signOut();
-    // navigate("/login");
   }
 
   const togglePage = () => {

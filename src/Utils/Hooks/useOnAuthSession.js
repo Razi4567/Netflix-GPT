@@ -17,7 +17,6 @@ const useOnAuthSession = () => {
             } = supabase.auth.onAuthStateChange(
                 (event, session) => {
                     console.log("Auth event:", event);
-                    console.log("Auth session:", session);
                     // Only load browse page if have a session access token, otherwise redirect to login page
                     if(session){
                         dispatch(addUser({username : session?.user?.user_metadata?.username, email : session?.user?.email }))  
